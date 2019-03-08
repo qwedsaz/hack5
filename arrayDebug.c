@@ -52,6 +52,7 @@ int *randomArray(int n) {
 
 double average(const int *a, int n) {
   int i, sum;
+  sum = 0;
   for(i=0; i<N; i++) {
     sum += a[i];
   }
