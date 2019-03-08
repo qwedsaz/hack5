@@ -26,8 +26,8 @@ void userMove(Move **board, Move player) {
 void randomComputerMove(Move **board) {
   int isValid = 0;
   while(!isValid) {
-    int move_row = random() % 3;
-    int move_col = random() % 3;
+    int move_row = rand() % 3;
+    int move_col = rand() % 3;
     if(board[move_row][move_col] == NONE) {
       board[move_row][move_col] = O;
       isValid = 1;
