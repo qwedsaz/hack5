@@ -47,7 +47,7 @@ int *randomArray(int n) {
   for(i=0; i<n; i++) {
     a[i] = random() % 10;
   }
-  return;
+  return a;
 }
 
 double average(const int *a, int n) {
