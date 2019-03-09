@@ -137,7 +137,8 @@ int main(int argc, char **argv) {
 
 void freeBoard(Move **board) {
 
-  for(int i=0; i<3; i++) {
+  int i;
+  for(i=0; i<3; i++) {
     free(board[i]);
   }
   free(board);
@@ -147,8 +148,9 @@ void freeBoard(Move **board) {
 Move ** copyBoard(Move **board) {
 
   Move **copy = newBoard();
-  for(int i=0; i<3; i++) {
-    for(int j=0; j<3; j++) {
+  int i, j;
+  for(i=0; i<3; i++) {
+    for(j=0; j<3; j++) {
       copy[i][j] = board[i][j];
     }
   }
@@ -157,9 +159,11 @@ Move ** copyBoard(Move **board) {
 
 Move ** newBoard() {
   Move **board = (Move **) malloc(3 * sizeof(Move*));
-  for(int i=0; i<3; i++) {
+  int i;
+  for(i=0; i<3; i++) {
     board[i] = (Move *) malloc(3 * sizeof(Move));
-    for(int j=0; j<3; j++) {
+    int j;
+    for(j=0; j<3; j++) {
       board[i][j] = NONE;
     }
   }
@@ -169,9 +173,11 @@ Move ** newBoard() {
 void printBoard(Move **board) {
 
   printf("\n");
-  for(int i=0; i<3; i++) {
+  int i;
+  for(i=0; i<3; i++) {
     printf("  ");
-    for(int j=0; j<3; j++) {
+    int j;
+    for(j=0; j<3; j++) {
       if(board[i][j] == X) {
         printf("  X  ");
       } else if(board[i][j] == O) {
@@ -304,8 +310,10 @@ void findBestMove(Move **board, int *row, int *col) {
   //always assume computer is O,
   //for each open move:
   int best = -1;
-  for(int i=0; i<3; i++) {
-    for(int j=0; j<3; j++) {
+  int i;
+  for(i=0; i<3; i++) {
+    int j;
+    for(j=0; j<3; j++) {
       if(board[i][j] == NONE) {
         board[i][j] = O;
         //if we can win right away do it
@@ -333,8 +341,10 @@ int numWinningCombos(Move **board, Move nextMove) {
   Status s = getStatus(board);
   if(s == PLAYING) {
 
-    for(int i=0; i<3; i++) {
-      for(int j=0; j<3; j++) {
+    int i;
+    for(i=0; i<3; i++) {
+      int j;
+      for(j=0; j<3; j++) {
         if(board[i][j] == NONE) {
           board[i][j] = nextMove;
           total += numWinningCombos(board, nextMove == X ? O : X);
