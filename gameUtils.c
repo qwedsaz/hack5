@@ -114,11 +114,8 @@ Status getStatus(Move **board) {
       for(j=0; j<3; j++) {
         if(board[i][j] == NONE) {
           s = PLAYING;
-          break;
+          return s;
         }
-      }
-      if(board[i][j-1] == NONE) {
-        break;
       }
     }
   }
