@@ -44,7 +44,6 @@ void smartComputerMove(Move **board) {
 
   findBestMove(copy, &row, &col);
   board[row][col] = O;
-  freeBoard(copy);
 
   return;
 }
