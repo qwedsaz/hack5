@@ -137,7 +137,8 @@ int main(int argc, char **argv) {
 
 void freeBoard(Move **board) {
 
-  for(int i=0; i<3; i++) {
+  int i;
+  for(i=0; i<3; i++) {
     free(board[i]);
   }
   free(board);
