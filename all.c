@@ -300,6 +300,7 @@ void smartComputerMove(Move **board) {
 
   findBestMove(copy, &row, &col);
   board[row][col] = O;
+  printf("%u\n%u\n", board[0][0], copy[0][0]);
   freeBoard(copy);
 
   return;
