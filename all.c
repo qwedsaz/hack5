@@ -2,6 +2,26 @@
 #include<stdio.h>
 #include<time.h>
 
+
+typedef enum {
+  TWO_PLAYER        = 1,
+  ONE_PLAYER_RANDOM = 2,
+  ONE_PLAYER_SMART  = 3,
+} GameMode;
+
+typedef enum {
+  NONE,
+  O,
+  X,
+} Move;
+
+typedef enum {
+  PLAYING,
+  O_WINS,
+  X_WINS,
+  TIE,
+} Status;
+
 void freeBoard(Move **board) {
 
   for(int i=0; i<3; i++) {
