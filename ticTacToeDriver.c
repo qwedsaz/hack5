@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
     //o moves
     printBoard(board);
     if(gameChoice == TWO_PLAYER) {
-      userMove(board, 0);
+      userMove(board, O);
     } else if(gameChoice == ONE_PLAYER_RANDOM) {
       randomComputerMove(board);
     } else if(gameChoice == ONE_PLAYER_SMART) {
