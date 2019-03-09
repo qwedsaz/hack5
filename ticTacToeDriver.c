@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
 
   int gameChoice = mainMenu();
   Move **board = newBoard();
-  Status s = getStatus(**board);
+  Status s = getStatus(board);
 
   while(s == PLAYING) {
 
