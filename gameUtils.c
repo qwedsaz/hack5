@@ -117,7 +117,7 @@ Status getStatus(Move **board) {
           break;
         }
       }
-      if(board[i][j] == NONE) {
+      if(board[i][j-1] == NONE) {
         break;
       }
     }
