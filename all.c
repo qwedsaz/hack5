@@ -22,6 +22,119 @@ typedef enum {
   TIE,
 } Status;
 
+/**
+ * Create a new tic-tac-toe board with all entries initialized
+ * to NONE
+ */
+Move ** newBoard();
+
+/**
+ * Creates a deep copy of the given tic-tac-toe board
+ */
+Move ** copyBoard(Move **board);
+
+/**
+ * Frees up the given board
+ */
+void freeBoard(Move **board);
+
+/**
+ * Prints the given game board to the standard output
+ */
+void printBoard(Move **board);
+
+/**
+ * Prompts the user to choose a given game mode, returning
+ * their choice.
+ */
+GameMode mainMenu();
+
+/**
+ * Determines the status of the given board, i.e. if it
+ * represents a winning configuration for X, O, or its a tie
+ * or that play should continue.
+ */
+Status getStatus(Move **board);
+
+/**
+ * Prompts the (human) player for a valid move and
+ * updates the game board.  Which player (X or O)
+ * is indicated by the given player.
+ */
+void userMove(Move **board, Move player);
+
+/**
+ * Makes a random move on the given board
+ * The computer player is always assumed to be O
+ */
+void randomComputerMove(Move **board);
+
+/**
+ * Given the current board along with who plays next
+ * (X or O), determines the number of "winning" combinations
+ * recursively.  Actually returns the number of wins/ties
+ * since as the second player, a computer player can only
+ * play to a tie game.
+ */
+int numWinningCombos(Move **board, Move nextMove);
+
+/**
+ * Given the current board, the computer plays the next
+ * best (ie least worst) move.
+ */
+void smartComputerMove(Move **board);
+
+/**
+ * Determines the the best row/column combination to play
+ * next given the current board.
+ */
+void findBestMove(Move **board, int *row, int *col);
+
+int main(int argc, char **argv) {
+
+  srandom(time(NULL));
+
+  int gameChoice = mainMenu();
+  Move **board = newBoard();
+  Status s = getStatus(board);
+
+  while(s == PLAYING) {
+
+    //x moves
+    printBoard(board);
+    userMove(board, X);
+    s = getStatus(board);
+    if(s != PLAYING) {
+      break;
+    }
+
+    //o moves
+    printBoard(board);
+    if(gameChoice == TWO_PLAYER) {
+      userMove(board, O);
+    } else if(gameChoice == ONE_PLAYER_RANDOM) {
+      randomComputerMove(board);
+    } else if(gameChoice == ONE_PLAYER_SMART) {
+      smartComputerMove(board);
+    }
+    s = getStatus(board);
+
+  }
+
+  printf("Final Board:\n");
+  printBoard(board);
+
+  if(s == O_WINS) {
+    printf("O Wins!\n");
+  } else if(s == X_WINS) {
+    printf("X Wins!\n");
+  } else if(s == TIE) {
+    printf("Cats game, please play again!\n");
+  }
+
+  return 0;
+}
+
 void freeBoard(Move **board) {
 
   for(int i=0; i<3; i++) {
@@ -240,49 +353,4 @@ int numWinningCombos(Move **board, Move nextMove) {
     printf("Illegal state!\n");
     exit(1);
   }
-}
-
-int main(int argc, char **argv) {
-
-  srandom(time(NULL));
-
-  int gameChoice = mainMenu();
-  Move **board = newBoard();
-  Status s = getStatus(board);
-
-  while(s == PLAYING) {
-
-    //x moves
-    printBoard(board);
-    userMove(board, X);
-    s = getStatus(board);
-    if(s != PLAYING) {
-      break;
-    }
-
-    //o moves
-    printBoard(board);
-    if(gameChoice == TWO_PLAYER) {
-      userMove(board, O);
-    } else if(gameChoice == ONE_PLAYER_RANDOM) {
-      randomComputerMove(board);
-    } else if(gameChoice == ONE_PLAYER_SMART) {
-      smartComputerMove(board);
-    }
-    s = getStatus(board);
-
-  }
-
-  printf("Final Board:\n");
-  printBoard(board);
-
-  if(s == O_WINS) {
-    printf("O Wins!\n");
-  } else if(s == X_WINS) {
-    printf("X Wins!\n");
-  } else if(s == TIE) {
-    printf("Cats game, please play again!\n");
-  }
-
-  return 0;
 }
