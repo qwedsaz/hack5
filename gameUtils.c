@@ -52,11 +52,10 @@ void printBoard(Move **board) {
       }
     }
     printf("\n");
-    if(i<3) {
+    if(i<2) {
       printf("  ------+-------+------\n");
     }
   }
-  printf("  ------+-------+------\n");
   printf("\n");
 
   return;
